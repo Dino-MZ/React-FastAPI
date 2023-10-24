@@ -4,14 +4,15 @@ import axios from 'axios';
 function App() {
   // FastAPI endpoint deployed on localhost
   const API_ENDPOINT = 'http://127.0.0.1:8000/'
-  const [documentData, setDocumentData] = useState([]);
+  const [documentData, setDocumentData] = useState({});
 
   // API Call
   const getDocument = async () => {
     try {
       const response = await axios.get(API_ENDPOINT);
-      console.log(response.data)
       setDocumentData(response.data)
+      
+      //console.log(response.data)
     }
     catch(err) {
       console.log(err);
