@@ -2,30 +2,31 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 function App() {
+  // FastAPI endpoint deployed on localhost
+  const API_ENDPOINT = 'http://127.0.0.1:8000/'
+  const [documentData, setDocumentData] = useState([]);
 
-  const [data, setData] = useState([]);
-
-  const msg = async () => {
+  // API Call
+  const getDocument = async () => {
     try {
-      let response = await axios.get('http://127.0.0.1:8000/');
-      let result = response.data
-      console.log(result)
-      setData(result)
+      const response = await axios.get(API_ENDPOINT);
+      console.log(response.data)
+      setDocumentData(response.data)
     }
-    catch(e) {
-      console.log(e);
+    catch(err) {
+      console.log(err);
     }
   }
 
   useEffect(() => {
-    msg()
+    getDocument()
   }, [])
 
   return (
     <div className="App">
       <pre>
         <code>
-         {JSON.stringify(data, null, 2)}
+         {JSON.stringify(documentData, null, 2)}
         </code>
       </pre>
     </div>

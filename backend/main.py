@@ -13,14 +13,17 @@ app.add_middleware(
     allow_origins=origins,
 )
 
-docUUID = uuid.uuid4()
-documentName = "My Very Important Document"
-dateCreated = datetime.now()
-description = "An important document"
-expirationDate = dateCreated + relativedelta(months=+1)
 
 @app.get("/")
 def read_root():
+    docUUID = uuid.uuid4()
+
+    documentName = "My Very Important Document"
+    description = "An important document"
+
+    dateCreated = datetime.now()
+    expirationDate = dateCreated + relativedelta(months=+1)
+    
     return {
         "uuid": docUUID,
         "document_name":documentName,
